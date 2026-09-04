@@ -1,0 +1,5 @@
+streamlit
+yfinance
+google-genai
+duckduckgo_search
+pandas
