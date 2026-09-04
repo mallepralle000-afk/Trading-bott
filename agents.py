@@ -7,7 +7,9 @@ from database import get_past_learnings, get_portfolio_status, update_portfolio_
     log_transaction, save_prediction
 from tools import get_stock_data, search_web, evaluate_risk
 
-client = genai.Client(api_key="AQ.Ab8RN6IOkcVbcrp4PS-CIYilyU5I16Oi2SABXX7WO1W7OeGnxw")
+# RICHTIG:
+import os
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 
 def run_trading_cycle():
