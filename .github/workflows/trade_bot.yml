@@ -26,11 +26,11 @@ jobs:
         run: |
           pip install google-genai yfinance duckduckgo_search pandas
 
-      - name: Bot ausführen
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          python agents.py
+      - name: Daytrading-Bot ausführen
+          env:
+            GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          run: |
+            PYTHONPATH=. python day_agent.py
 
       - name: Datenbank-Stand in GitHub sichern
         run: |
