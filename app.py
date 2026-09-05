@@ -14,8 +14,6 @@ try:
 except Exception as e:
     st.info("Noch keine Daten für den Langzeit-Bot vorhanden.")
 
----
-
 # --- BEREICH 2: Daytrading-Bot ---
 st.header("⚡ Daytrading-Bot (5-Minuten-Takt)")
 
