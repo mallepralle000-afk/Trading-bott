@@ -1,5 +1,5 @@
 streamlit
 yfinance
 google-genai
-duckduckgo_search
+ddgs
 pandas
