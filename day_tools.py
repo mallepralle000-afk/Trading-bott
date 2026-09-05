@@ -14,13 +14,12 @@ def get_intraday_data(ticker_symbol, interval="5m", period="5d"):
     if df.empty:
         return None
 
-    # Berechne einfache gleitende Durchschnitte (EMA/SMA) und RSI für den Trend
+    # Berechne einfache gleitende Durchschnitte (SMA) für den Trend
     df['SMA_9'] = df['Close'].rolling(window=9).mean()
     df['SMA_21'] = df['Close'].rolling(window=21).mean()
 
     # Letzte bekannte Kerze extrahieren
     latest = df.iloc[-1]
-    prev = df.iloc[-2]
 
     data_summary = {
         "ticker": ticker_symbol,
