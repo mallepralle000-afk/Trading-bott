@@ -23,10 +23,7 @@ def manage_day_trade():
         return
 
     current_price = market_data["current_price"]
-    print(aktueller
-    Kurs
-    für
-    {TICKER}: {current_price})
+    print(f"Aktueller Kurs für {TICKER}: {current_price}")
 
     # 2. Prüfen, ob bereits eine Position offen ist
     cursor.execute("SELECT entry_price, shares, stop_loss, take_profit FROM open_positions WHERE ticker = ?", (TICKER,))
@@ -34,15 +31,12 @@ def manage_day_trade():
 
     if position:
         entry_price, shares, stop_loss, take_profit = position
-        print(Aktive
-        Position
-        gefunden.Einstieg: {entry_price}, SL: {stop_loss}, TP: {take_profit})
+        print(f"Aktive Position gefunden. Einstieg: {entry_price}, SL: {stop_loss}, TP: {take_profit}")
 
         # Harte Exit-Regeln (Stop Loss oder Take Profit erreicht?)
         if current_price <= stop_loss or current_price >= take_profit:
             pnl = (current_price - entry_price) * shares
-            print(Verkauf
-            ausgelöst! PnL: {pnl})
+            print(f"Verkauf ausgelöst! PnL: {pnl}")
 
             cursor.execute("DELETE FROM open_positions WHERE ticker = ?", (TICKER,))
             cursor.execute("""
@@ -75,11 +69,9 @@ def manage_day_trade():
             contents=prompt,
         )
         decision = response.text.strip()
-        print(Gemini
-        Entscheidung: {decision})
+        print(f"Gemini Entscheidung: {decision}")
 
         if "BUY" in decision:
-            # Einfache Extraktion für das Beispiel
             shares = int(5000 / current_price)  # Nutze die Hälfte des Kapitals
             stop_loss = current_price * 0.985
             take_profit = current_price * 1.03
@@ -95,13 +87,10 @@ def manage_day_trade():
             """, (TICKER, "BUY", current_price, shares, str(datetime.now()), 0.0))
 
             conn.commit()
-            print(Kauf
-            ausgeführt: {shares}
-            Aktien
-            zu
-            {current_price})
+            print(f"Kauf ausgeführt: {shares} Aktien zu {current_price}")
 
-            conn.close()
+    conn.close()
 
-        if __name__ == "__main__":
-            manage_day_trade()
+
+if __name__ == "__main__":
+    manage_day_trade()
