@@ -30,12 +30,14 @@ jobs:
         run: |
           python -c "import init_day_db; init_day_db.init_db()" || true
 
+      - name: Dateien auflisten (Debug)
+          run: ls -la
+
       - name: Daytrading-Bot ausführen
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          python day_agent.py
-
+          PYTHONPATH=. python day_agent.py
       - name: Daytrading-Datenbank in GitHub sichern
         run: |
           git config --global user.name "github-actions[bot]"
