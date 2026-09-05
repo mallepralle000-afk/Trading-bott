@@ -30,8 +30,7 @@ jobs:
         run: |
           python -c "import init_day_db; init_day_db.init_db()" || true
 
-      - name: Dateien auflisten (Debug)
-          run: ls -la
+
 
       - name: Daytrading-Bot ausführen
         env:
